@@ -1,0 +1,26 @@
+<%= form_for [:admin, @post] do |f| %>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </p>
+
+
+  <%= f.fields_for :access_restriction, @post.access_restriction do |af| %>
+    <p>
+      <%= af.label "Members Only" %><br>
+      <%= af.check_box :to_members_only %>
+    </p>
+
+    <p>
+      <%= af.label "Members And Non-Members" %><br>
+      <%= af.check_box :to_all %>
+    </p>
+  <% end %>
+
+  <p><%= f.submit "Post", :disable_with => "Posting ..." %></p>
+<% end %>
